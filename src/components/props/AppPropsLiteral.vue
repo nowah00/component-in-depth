@@ -2,6 +2,10 @@
 import { reactive } from 'vue';
 import AppPropsLiteralChild from './AppPropsLiteralChild.vue';
 
+const props = defineProps({
+  viewTitle: String,
+});
+
 const fruits = reactive([
   { id: 'f1', name: '사과', checked: true },
   { id: 'f2', name: '파인애플', checked: false },
