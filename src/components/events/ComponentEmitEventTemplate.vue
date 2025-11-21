@@ -8,12 +8,24 @@ defineProps({
 
 const message = ref('');
 
+// 4-1. 데이터를 담을 객체 생성
+const isActive = ref(false);
+
+// 4-3. 메서드 값을 적용
+const changeActive = () => {
+  isActive.value = !isActive.value;
+};
+
 const greet = () => {
   message.value = '지금 이 순간도 너의 성공 이야기의 한 페이지야~';
 };
 
 const greetArg = (greet) => {
   message.value = greet;
+};
+
+const toggleEvent = () => {
+  message.value = '활성화 상태입니다.';
 };
 </script>
 
@@ -31,10 +43,19 @@ const greetArg = (greet) => {
       @: v-on을 축약하여 쓴 버전
       결과 = v-on과 @는 동일함!
     -->
+
+    <!-- 1-1. 색값 자식 컴포넌트에게 보냄 -->
+    <!-- 4-4. 자식 컴포넌트에게 isActive 데이터 전송 -->
     <ComponentEmitEventTemplateChild
       v-on:greeting-event="greet"
       @greeting-arg-event="greetArg"
+      color="pink"
+      :isActive="isActive"
+      @toggle-event="toggleEvent"
     />
+
+    <!-- 4-2. 버튼을 통해 메서드 실행 -->
+    <button @click="changeActive">활성화/비활성화</button>
 
     <h3>{{ message }}</h3>
   </div>

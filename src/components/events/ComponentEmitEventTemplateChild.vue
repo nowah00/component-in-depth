@@ -1,6 +1,13 @@
 <script setup>
 import { ref } from 'vue';
 
+// 1-2. props로 받음
+// 4-5. props로 받음
+defineProps({
+  color: String,
+  isActive: Boolean,
+});
+
 const greet = ref('');
 </script>
 
@@ -12,11 +19,15 @@ const greet = ref('');
 -->
 
 <template>
-  <div class="child">
+  <!-- 1-3. 부모 컴포넌트에게 받은 색상 적용 -->
+  <div class="child" :style="{ backgroundColor: color }">
     <h3>Child 영역입니다</h3>
 
     <div class="div-btn">
-      <button @click="$emit('greetingEvent')">인사해요</button>
+      <!-- 4-6. 적용 -->
+      <button @click="$emit('greetingEvent')" :disabled="isActive">
+        인사해요
+      </button>
     </div>
 
     <div class="div-btn">
@@ -29,6 +40,10 @@ const greet = ref('');
       <button @click="$emit('greetingArgEvent', greet)">
         인사해요(인자전달)
       </button>
+      <br />
+
+      <!-- 5-1. 토글하기 버튼 생성 -->
+      <button @click="$emit('toggleEvent')">토글하기</button>
     </div>
   </div>
 </template>
